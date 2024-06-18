@@ -1,0 +1,340 @@
+@import "~ag-grid-community/styles/ag-grid.css";
+@import "~ag-grid-community/styles/ag-theme-alpine.css";
+@import "~ag-grid-community/styles/ag-theme-alpine-dark.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --primary: #3855e8;
+  --heading-color: #7d7d7d;
+  --bg-shade: #f0f3f7;
+  --black: #0d1321;
+  --white: #ffffff;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+ background-color: var(--bg-shade);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: flex-start;
+  margin: 20px 40px;
+}
+body.dark-mode {
+  --primary: #f0f3f7;
+  --heading-color: #e0e0e0;
+  --bg-shade: #26272b;
+  --black: #ffffff;
+  --white: #464646;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+h1 {
+  text-align: center;
+  color: var(--primary);
+}
+h3 {
+  font-size: 20px;
+  color: var(--black);
+}
+h4 {
+  font-size: 18px;
+  color: var(--black);
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.logo--title {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0px;
+}
+.logo--title img {
+  height: 40px;
+  border-radius: 50%;
+  padding-bottom: 3px;
+}
+.logo--title h1 {
+ color: var(--primary);
+}
+.button-container, .button-container-mobile, .menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.menu-container { 
+  gap: 0px;
+  }
+.button-container-mobile { 
+  display: none;  
+  gap: 0px;
+  }
+
+.btn {
+  font-family: "Poppins";
+  display: flex;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  transition: background-color 0.5s;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+}
+.btn-outline-primary {
+  color: var(--primary);
+  background-color: var(--white);
+  border: 1px solid var(--primary);
+}
+.btn-outline-primary:hover {
+  color: var(--white);
+  background-color: var(--primary);
+  border: 1px solid var(--white);
+  svg g {
+    stroke: var(--white); 
+  }
+}
+.btn-primary {
+  color: var(--white);
+  background-color: var(--primary);
+  border: 1px solid var(--white);
+}
+.btn-primary:hover {
+  color: var(--primary);
+  background-color: var(--white);
+  border: 1px solid var(--primary);
+  svg g {
+    stroke: var(--primary); 
+  }
+}
+.btn-span {
+  padding: 0px 20px;
+  font-size: 13px;
+}
+.btn span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8em 0.9em 0.8em 1.02em;
+}
+.btn svg {
+  width: 1.2em;
+  height: 1.2em;
+  padding-right: 7px;
+  stroke-width: 2px;
+}
+.btn svg g {
+  stroke: var(--white);
+}
+.btn-outline-primary svg g {
+  stroke: var(--primary);
+}
+.wiki-logo{
+  background-color: transparent;
+  border: none;
+}
+.wiki-logo h1{
+  font-family: "Poppins";
+}
+
+iframe {
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 30px 0px;
+  background-color: white;
+
+}
+
+
+.loader-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 10px;
+}
+
+.loader-container h3 {
+  display: none;
+  color: var(--primary);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeInFadeOut 2s ease-in-out alternate infinite;
+}
+
+@keyframes fadeInFadeOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.loader {
+  display: none;
+  margin-left: 200px;
+  width: 200px;
+  height: 20px;
+  border-radius: 20px;
+  background: radial-gradient(farthest-side, #ffffff 94%, #0000) left/20px 20px
+    no-repeat #3855e8;
+  animation: l2 1s infinite linear;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes l2 {
+  50% {
+    background-position: right;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.next-icon, .previous-icon {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.next-icon svg, .previous-icon svg{
+  fill: var(--black);
+}
+.hamburger-menu {
+  position: relative;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  background: none;
+  border: none;
+  margin-left: 10px;
+}
+
+.hamburger-menu .bar {
+  width: 30px;
+  height: 3px;
+  border-radius: 2px;
+  background-color: var(--primary);
+  margin-bottom: 5px;
+}
+.find-button-container{
+  display: flex;
+  align-self: center;
+}
+.menu-items {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px; 
+  height: 100%;
+  background-color: var(--white); 
+  transition: right 0.3s ease-in-out;
+  box-shadow: 0px 5.333px 80px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.menu-items button {
+  margin: 10px;
+}
+
+.menu-items ul {
+  list-style: none;
+  padding: 0;
+  max-height: 800px;
+  overflow-y: auto; 
+}
+
+.menu-items ul li{
+  padding: 10px 0;
+}
+
+.menu-items ul li a {
+  display: block;
+  color: var(--black); 
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+.close-menu {
+  position: relative;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.close-menu .bar {
+  width: 30px;
+  height: 3px;
+  border-radius: 2px;
+  background-color:var(--black);
+  margin-bottom: 5px;
+}
+
+footer {
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--primary);
+  position: relative; 
+  bottom: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    margin: 10px;
+  }
+  .button-container {
+    display: none;
+  }
+  .button-container-mobile {
+    display: flex;
+  }
+}

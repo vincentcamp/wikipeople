@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>People Information</title>
+    <link rel="stylesheet" href="/static/toggle_button.css" />
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+    <script>
+      function formatEducationInfo(params) {
+      // Check if there are detailed education entries available
+      if (params.value && Array.isArray(params.value) && params.value.length > 0) {
+          return params.value.map(entry => `${entry.college} (${entry.degree})`).join(', ');
+      }
+      else// Fallback to displaying the college name used in the query
+        return params.data.collegeName || 'N/A';
+  }
+  
+  function dateComparator(date1, date2) {
+      const dateParse1 = Date.parse(date1);
+      const dateParse2 = Date.parse(date2);
+      return dateParse1 - dateParse2;
+  }
+  
+  const columnDefs = [
+      { field: "personLabel", headerName: "Name", flex: 1},
+      {
+          field: "dateOfBirth",
+          headerName: "Date of Birth",
+          comparator: dateComparator,
+      },
+      { field: "education", headerName: "Education",  flex: 1}, 
+      { field: "description", headerName: "Description",  flex: 1 },
+ //remove occupation
+      {
+          field: "wikipediaUrl", headerName: "Wikipedia Link", cellRenderer: function(params) {
+              return params.value ? `<a href="${params.value}" target="_blank">Wikipedia</a>` : '';
+          }
+      },
+  ];
+  
+  const rowData = {{ person_info | tojson | safe }};
+  
+  const gridOptions = {
+      columnDefs: columnDefs,
+      rowData: rowData,
+      pagination: true,
+      paginationPageSize: 100,
+      domLayout: 'autoHeight',
+  };
+  
+  
+  document.addEventListener('DOMContentLoaded', () => {
+      const gridDiv = document.querySelector('#peopleGrid');
+      new agGrid.Grid(gridDiv, gridOptions);
+  });
+  
+  function downloadCSV() {
+      gridOptions.api.exportDataAsCsv();
+  }</script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/styles/ag-grid.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/styles/ag-theme-alpine.min.css"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/styles/ag-theme-alpine-dark.min.css"
+  />
+    <link rel="stylesheet" href="/static/result_styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <form id="search" action="/new" method="post">
+        <button class="wiki-logo" type="submit">
+          <div class="logo--title">
+            <img src="static/img/logo.png" alt="Database Mode Icon" />
+            <h1>WikiPeople.io</h1>
+          </div>
+        </button>
+      </form>
+      <div class="button-container">
+        <button class="btn btn-outline-primary" onclick="downloadCSV()">
+          Download CSV
+        </button>
+        <form action="/new" method="post">
+          <button class="btn btn-primary btn-span" type="submit">
+            <span>
+              <svg
+                viewBox="0 0 19.9 19.7"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-labelledby="title desc"
+                class="svg-icon search-icon"
+              >
+                <g stroke="white" fill="none" class="search-path">
+                  <path d="M18.5 18.3l-5.4-5.4" stroke-linecap="square"></path>
+                  <circle r="7" cy="8" cx="8"></circle>
+                </g>
+              </svg>
+              Find Again
+            </span>
+          </button>
+        </form>
+      </div>
+      <div class="button-container-mobile">
+        <button class="previous-icon" onclick="downloadCSV()">
+          <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+          </svg>     
+        </button>
+      </div>
+    </div>
+    <div
+      id="peopleGrid"
+      class="ag-theme-alpine"
+      style="height: 600px; width: 100%"
+    ></div>
+   
+    <script src="/static/scripts/theme.js"></script>
+  </body>
+</html>

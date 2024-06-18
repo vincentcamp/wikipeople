@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/result_styles.css" />
+    <link rel="stylesheet" href="/static/toggle_button.css" />
+    <title>No Result</title>
+
+  </head>
+  <body >
+    <style>
+      body {
+        justify-content: center;
+        height: 100vh;
+      }
+      .logo--title{
+        margin-bottom: 20px;
+      }
+      </style>
+      <div class="logo--title">
+        <h3>WikiPeople.io can't find what you're looking for</h3>
+      </div>
+      <div class="find-button-container">
+        <form id="search" action="/new" method="post">
+          <button class="btn btn-outline-primary btn-span" type="submit">
+            <span>
+              <svg
+                viewBox="0 0 19.9 19.7"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-labelledby="title desc"
+                class="svg-icon search-icon"
+              >
+                <g fill="none" class="search-path">
+                  <path
+                    d="M18.5 18.3l-5.4-5.4"
+                    stroke-linecap="square"
+                  ></path>
+                  <circle r="7" cy="8" cx="8"></circle>
+                </g>
+              </svg>
+              Find Again
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+    <script src="/static/scripts/theme.js"></script>
+  </body>
+</html>

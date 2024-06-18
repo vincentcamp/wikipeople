@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random People Finder</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/toggle_button.css" />
+    <script src="/static/colleges.json"></script>
+    <script src="/static/occupations.json"></script>
+    <script src="/static/scripts/index.js"></script>
+  </head>
+  <body>
+    <div class="loader-container" id="loader-container">
+      <h3 id="title">WikiPeople.io is searching...</h3>
+      <div class="loader"></div>
+    </div>
+    <div class="logo--title">
+      <img src="static/img/logo.png" alt="Database Mode Icon" />
+      <h1>WikiPeople.io</h1>
+    </div>
+    <form
+      id="myForm"
+      action="/"
+      method="post"
+      onsubmit="handleFormSubmit(event)"
+    >
+      <div class="mode-container">
+        <label for="database">
+          <div class="mode-box">
+            <input
+              type="radio"
+              id="database"
+              name="mode"
+              value="database"
+              checked
+            />
+
+            <div class="mode-item-box">
+              <div class="mode-item">
+                <img
+                  src="static/img/database-icon.png"
+                  alt="Database Mode Icon"
+                />
+                <label for="database"> Database Mode </label>
+              </div>
+              <p>
+                Views a List of People with the same college, occupation or both
+              </p>
+            </div>
+          </div>
+        </label>
+        <label for="random">
+          <div class="mode-box">
+            <input type="radio" id="random" name="mode" value="random" />
+            <div class="mode-item-box">
+              <div class="mode-item">
+                <img src="static/img/dice.png" alt="Database Mode Icon" />
+                <label for="random"> Random Mode </label>
+              </div>
+              <p>Select a Random Person based on college, occupation or both</p>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="birth-year--header">
+        <div class="birth-year--title">
+          <img src="static/img/birthday.png" alt="Database Mode Icon" />
+          <h2>Birth Year</h2>
+        </div>
+        <div>
+          <button
+            class="btn btn-outline-primary btn-small"
+            type="button"
+            onclick="clearDates()"
+          >
+            Clear Dates
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="birth-year--container">
+          <div class="form_item">
+            <label for="start_year_input">Start Year</label>
+            <input
+              id="start_year_input"
+              type="text"
+              value="The Beginning of Time"
+              oninput="handleManualDateEntry(event, 'fromSlider')"
+            />
+            <input
+            id="start_year_input_default"
+            type="hidden"
+            value="0"
+          />
+            <div class="sliders_control">
+              <input
+                id="fromSlider"
+                type="range"
+                name="start_year"
+                min="0"
+                max="2024"
+                value="0"
+                oninput="updateYearValues()"
+              />
+            </div>
+          </div>
+          <div class="form_item">
+            <label for="end_year_input" class="form__label">End Year</label>
+            <input
+              id="end_year_input"
+              class="form__field"
+              type="text"
+              value="2024"
+              oninput="handleManualDateEntry(event, 'toSlider')"
+            />
+            <div class="sliders_control">
+              <input
+                id="toSlider"
+                type="range"
+                name="end_year"
+                min="0"
+                max="2024"
+                value="2024"
+                oninput="updateYearValues()"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <input type="hidden" id="start_year" name="start_year" />
+      <input type="hidden" id="end_year" name="end_year" />
+
+      <div class="custom-select-wrapper">
+        <div class="custom-select">
+          <div class="birth-year--title college-occupation--title">
+            <img src="static/img/college.png" alt="College Mode Icon" />
+            <h2>College</h2>
+          </div>
+          <div class="custom-select__trigger">
+            <input
+              type="text"
+              id="college-name-input"
+              placeholder="Enter college or university name"
+              autocomplete="off"
+            />
+          </div>
+          <div class="custom-options" id="colleges-list"></div>
+        </div>
+      </div>
+      <input type="hidden" name="college" id="college-input" />
+
+      <div class="occupation-wrapper">
+        <div class="occupation-select">
+          <div class="birth-year--title college-occupation--title">
+            <img src="static/img/college.png" alt="College Mode Icon" />
+            <h2>Occupation</h2>
+          </div>
+          <div class="occupation-select__trigger">
+            <input
+              type="text"
+              id="occupation-name-input"
+              placeholder="Enter occupation"
+              autocomplete="off"
+            />
+          </div>
+          <div class="occupation-options" id="occupations-list">
+            <!-- Options populated via JavaScript -->
+          </div>
+        </div>
+      </div>
+      <input type="hidden" name="occupation" id="occupation-input" />
+
+      <button class="find-button" type="submit" value="Find">
+        <span>
+          <svg
+            viewBox="0 0 19.9 19.7"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby="title desc"
+            class="svg-icon search-icon"
+          >
+            <g stroke="white" fill="none" class="search-path">
+              <path d="M18.5 18.3l-5.4-5.4" stroke-linecap="square"></path>
+              <circle r="7" cy="8" cx="8"></circle>
+            </g>
+          </svg>
+          Find
+        </span>
+      </button>
+    </form>
+    <footer>
+      <p>&copy; 2024 WikiPeople.io</p>
+    </footer>
+    <script src="/static/scripts/theme.js"></script>
+  </body>
+</html>

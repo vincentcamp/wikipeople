@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/result_styles.css" />
+    <link rel="stylesheet" href="/static/toggle_button.css" />
+    <title>Embedded Wikipedia Page</title>
+  </head>
+  <body>
+    <div class="loader-container" id="loader-container">
+      <h3 id="title">WikiPeople.io is searching...</h3>
+      <div class="loader"></div>
+    </div>
+    <div class="header">
+      <form id="search" action="/new" method="post">
+        <button class="wiki-logo" type="submit">
+          <div class="logo--title">
+            <img src="static/img/logo.png" alt="Database Mode Icon" />
+            <h1>WikiPeople.io</h1>
+          </div>
+        </button>
+      </form>
+      <div class="menu-container">
+        <div class="button-container">
+          <form id="previous" action="/previous" method="post">
+            <button class="btn btn-outline-primary" type="submit">
+              Previous
+            </button>
+          </form>
+          <form
+            id="next"
+            action="/next"
+            method="post"
+            onsubmit="handleFormSubmitNext(event)"
+          >
+            <input type="hidden" name="start_year" value="{{ start_year }}" />
+            <input type="hidden" name="end_year" value="{{ end_year }}" />
+            <input type="hidden" name="college" value="{{ college }}" />
+            <input type="hidden" name="occupation" value="{{ occupation }}" />
+            <button class="btn btn-outline-primary" type="submit">Next</button>
+          </form>
+
+          <form id="search" action="/new" method="post">
+            <button class="btn btn-primary btn-span" type="submit">
+              <span>
+                <svg
+                  viewBox="0 0 19.9 19.7"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-labelledby="title desc"
+                  class="svg-icon search-icon"
+                >
+                  <g fill="none" class="search-path">
+                    <path
+                      d="M18.5 18.3l-5.4-5.4"
+                      stroke-linecap="square"
+                    ></path>
+                    <circle r="7" cy="8" cx="8"></circle>
+                  </g>
+                </svg>
+                Find Again
+              </span>
+            </button>
+          </form>
+  
+      </div>      
+
+    <div class="button-container-mobile">
+      <form id="search" action="/new" method="post">
+        <button class="previous-icon" type="submit">
+            <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+            </svg>      
+        </button>
+      </form>
+      <form  action="/next"
+      method="post"
+      onsubmit="handleFormSubmitNext(event)">
+      <input type="hidden" name="start_year" value="{{ start_year }}" />
+      <input type="hidden" name="end_year" value="{{ end_year }}" />
+      <input type="hidden" name="college" value="{{ college }}" />
+      <input type="hidden" name="occupation" value="{{ occupation }}" />
+        <button class="next-icon"type="submit">
+            <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+            </svg>      
+        </button>
+      </form>
+    </button>
+    </div>
+    <button
+    class="hamburger-menu"
+    aria-label="Open menu"
+    aria-expanded="false"
+  >
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <div class="menu-items">
+    <button
+      class="close-menu"
+      aria-label="Open menu"
+      aria-expanded="false"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <h4>Recent Searched People</h4>
+    <ul id="menu-list"></ul>
+  </div>
+  </div>
+</div>
+    <iframe
+      id="wiki-iframe"
+      src="{{ wikipedia_url }}"
+      width="100%"
+      height="800px"
+    ></iframe>
+    <br />
+    <footer>
+      <p>&copy; 2024 WikiPeople.io</p>
+    </footer>
+    <script src="/static/scripts/theme.js"></script>
+    <script src="/static/scripts/embed.js"></script>
+  </body>
+</html>
